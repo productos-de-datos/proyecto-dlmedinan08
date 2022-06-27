@@ -11,6 +11,7 @@ def transform_data():
 
     def transform_to_csv(year, header, fil_ext):
         read_file = pd.read_excel("data_lake/landing/{}{}".format(year, fil_ext), header=header).iloc[:,0:25]
+        read_file['Fecha'] = pd.to_datetime(read_file['Fecha'], format='%Y-%m-%d')
         read_file.to_csv("data_lake/raw/{}.csv".format(year), index=None)
 
         return
