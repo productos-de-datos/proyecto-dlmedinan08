@@ -1,3 +1,9 @@
+'''
+This process trains a linear regression model
+'''
+# pylint: disable=import-outside-toplevel
+# pylint: disable=consider-using-with
+
 def train_daily_model():
     """Entrena el modelo de pronóstico de precios diarios.
 
@@ -7,7 +13,6 @@ def train_daily_model():
 
     """
     import pandas as pd
-    import numpy as np
     from sklearn import linear_model
     from sklearn.metrics import r2_score
     import pickle
@@ -20,24 +25,22 @@ def train_daily_model():
 
     precios_diarios.dropna(inplace=True)
 
-    X = precios_diarios.copy().drop(columns = 'Fecha')
-    y = X.pop('precio')
-    
-    X_train = X[:round(X.shape[0]*0.75)]
-    X_test = X[round(X.shape[0]*0.75):]
-    y_train = y[:round(y.shape[0]*0.75)]
-    y_test = y[round(y.shape[0]*0.75):]
-    
-    regression = linear_model.LinearRegression()
-    regression.fit(X_train, y_train)
+    x_complete = precios_diarios.copy().drop(columns = 'Fecha')
+    y_complete = x_complete.pop('precio')
 
-    r2_score(y_test,regression.predict(X_test))
+    x_train = x_complete[:round(x_complete.shape[0]*0.75)]
+    x_test = x_complete[round(x_complete.shape[0]*0.75):]
+    y_train = y_complete[:round(y_complete.shape[0]*0.75)]
+    y_test = y_complete[round(y_complete.shape[0]*0.75):]
+
+    regression = linear_model.LinearRegression()
+    regression.fit(x_train, y_train)
+
+    r2_score(y_test,regression.predict(x_test))
 
     pickle.dump(regression, open('src/models/precios-diarios.pkl', 'wb'))
 
-    return
-    raise NotImplementedError("Implementar esta función")
-
+    # raise NotImplementedError("Implementar esta función")
 
 if __name__ == "__main__":
     import doctest

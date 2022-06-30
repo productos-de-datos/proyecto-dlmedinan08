@@ -1,3 +1,9 @@
+'''
+This process forecasts a linear regression model
+'''
+# pylint: disable=import-outside-toplevel
+# pylint: disable=consider-using-with
+
 def make_forecasts():
     """Construya los pronosticos con el modelo entrenado final.
 
@@ -13,8 +19,6 @@ def make_forecasts():
 
     """
     import pandas as pd
-    import numpy as np
-    from sklearn import linear_model
     from sklearn.metrics import r2_score
     import pickle
 
@@ -26,20 +30,20 @@ def make_forecasts():
 
     precios_diarios.dropna(inplace=True)
 
-    X = precios_diarios.copy().drop(columns = 'Fecha')
-    y = X.pop('precio')
+    x_complete = precios_diarios.copy().drop(columns = 'Fecha')
+    y_complete = x_complete.pop('precio')
 
     regression = pickle.load(open('src/models/precios-diarios.pkl', 'rb'))
-    prediction = regression.predict(X)
+    prediction = regression.predict(x_complete)
 
-    r2_score(y,regression.predict(X))
+    r2_score(y_complete,regression.predict(x_complete))
 
     precios_diarios['Prediction'] = prediction
 
-    precios_diarios[['Fecha', 'precio', 'Prediction']].to_csv('data_lake/business/forecasts/precios-diarios.csv', index=None)
+    precios_diarios[['Fecha', 'precio', 'Prediction']].to_csv(
+        'data_lake/business/forecasts/precios-diarios.csv', index=None)
 
-    return
-    raise NotImplementedError("Implementar esta función")
+    # raise NotImplementedError("Implementar esta función")
 
 
 if __name__ == "__main__":
