@@ -32,7 +32,7 @@ def test_correct_column_number():
     import pandas as pd
 
     precios_diarios = pd.read_csv('data_lake/business/precios-diarios.csv')
-    assert 3 == len(precios_diarios.columns)
+    assert 2 == len(precios_diarios.columns)
 
 
 if __name__ == "__main__":

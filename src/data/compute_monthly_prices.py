@@ -36,7 +36,7 @@ def test_correct_column_number():
     import pandas as pd
 
     precios_mensuales = pd.read_csv('data_lake/business/precios-mensuales.csv')
-    assert 3 == len(precios_mensuales.columns)
+    assert 2 == len(precios_mensuales.columns)
 
 if __name__ == "__main__":
     import doctest
