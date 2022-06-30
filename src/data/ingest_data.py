@@ -3,7 +3,8 @@ Módulo de ingestión de datos.
 -------------------------------------------------------------------------------
 
 """
-
+# pylint: disable=import-outside-toplevel
+# pylint: disable=consider-using-f-string
 
 def ingest_data():
     """Ingeste los datos externos a la capa landing del data lake.
@@ -17,7 +18,7 @@ def ingest_data():
     #import xlwt
 
     path = 'https://github.com/jdvelasq/datalabs/blob/master/datasets/precio_bolsa_nacional/xls'
-    
+
     years_diff_format = ['2016', '2017']
     years_to_download = [str(year) for year in range(1995, 2022)]
     years_to_download.remove(years_diff_format[0])
@@ -31,7 +32,6 @@ def ingest_data():
             file = 'data_lake/landing/{}.xlsx'.format(year)
             download = pd.read_excel(url_path, engine='openpyxl')
             download.to_excel(file, index = None, header = True)
-        return
 
     def import_data_xls(path, file_identifier):
 
@@ -41,7 +41,6 @@ def ingest_data():
             file = 'data_lake/landing/{}.xls'.format(year)
             download = pd.read_excel(url_path)
             download.to_excel(file, index = None, header = True)
-        return
 
     import_data_xlsx(path, years_to_download)
     import_data_xls(path, years_diff_format)
@@ -50,6 +49,6 @@ def ingest_data():
 
 if __name__ == "__main__":
     import doctest
-    
+
     doctest.testmod()
     ingest_data()

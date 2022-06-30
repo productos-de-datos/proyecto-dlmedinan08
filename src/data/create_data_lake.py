@@ -1,3 +1,7 @@
+'''
+This function creates all data lake files
+'''
+# pylint: disable=import-outside-toplevel
 def create_data_lake():
     """Cree el data lake con sus capas.
 
@@ -7,11 +11,11 @@ def create_data_lake():
     ```
     .
     |
-    \___ data_lake/
+    ___ data_lake/
          |___ landing/
          |___ raw/
          |___ cleansed/
-         \___ business/
+         ___ business/
               |___ reports/
               |    |___ figures/
               |___ features/
@@ -26,19 +30,16 @@ def create_data_lake():
     os.mkdir("./data_lake")
 
     parent_dir = 'data_lake/'
-    dir = ['landing', 'raw', 'cleansed', 'business']
+    directories = ['landing', 'raw', 'cleansed', 'business']
 
     parent_dir_business = 'data_lake/business/'
     subdir_business = ['reports', 'features', 'forecasts']
 
     parent_dir_reports = 'data_lake/business/reports/'
     subdir_reports = ['figures']
-    
-    [os.mkdir(os.path.join(parent_dir, dirs)) for dirs in dir]
-    [os.mkdir(os.path.join(parent_dir_business, dirs)) for dirs in subdir_business]
-    [os.mkdir(os.path.join(parent_dir_reports, dirs)) for dirs in subdir_reports]
-
-    return
+    dummy_a = [os.mkdir(os.path.join(parent_dir, dirs)) for dirs in directories]
+    dummy_b = [os.mkdir(os.path.join(parent_dir_business, dirs)) for dirs in subdir_business]
+    dummy_c = [os.mkdir(os.path.join(parent_dir_reports, dirs)) for dirs in subdir_reports]
 
 if __name__ == "__main__":
     import doctest
