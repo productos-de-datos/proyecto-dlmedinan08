@@ -25,7 +25,15 @@ def compute_daily_prices():
 
     precios_diarios.to_csv('data_lake/business/precios-diarios.csv', index=None)
 
-    #raise NotImplementedError("Implementar esta función")
+def test_correct_column_number():
+    '''
+    This test checks if the output file has the correct number of columns
+    '''
+    import pandas as pd
+
+    precios_diarios = pd.read_csv('data_lake/business/precios-diarios.csv')
+    assert 3 == len(precios_diarios.columns)
+
 
 if __name__ == "__main__":
     import doctest

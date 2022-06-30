@@ -29,7 +29,14 @@ def compute_monthly_prices():
 
     precios_mensuales.to_csv('data_lake/business/precios-mensuales.csv', index=None)
 
-    #raise NotImplementedError("Implementar esta función")
+def test_correct_column_number():
+    '''
+    This test checks if the output file has the correct number of columns
+    '''
+    import pandas as pd
+
+    precios_mensuales = pd.read_csv('data_lake/business/precios-mensuales.csv')
+    assert 3 == len(precios_mensuales.columns)
 
 if __name__ == "__main__":
     import doctest
