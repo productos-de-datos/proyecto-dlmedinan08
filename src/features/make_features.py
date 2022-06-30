@@ -1,3 +1,8 @@
+'''
+This process creates a csv file with a the features to train the model
+'''
+# pylint: disable=import-outside-toplevel
+
 def make_features():
     """Prepara datos para pronóstico.
 
@@ -12,7 +17,7 @@ def make_features():
     analizar y determinar las variables explicativas del modelo.
 
     """
-    import pandas as pd 
+    import pandas as pd
 
     precios_diarios = pd.read_csv('data_lake/business/precios-diarios.csv')
     precios_diarios['Fecha'] = pd.to_datetime(precios_diarios['Fecha'], format='%Y-%m-%d')
@@ -24,9 +29,7 @@ def make_features():
 
     precios_diarios.to_csv('data_lake/business/features/precios-diarios.csv', index=None)
 
-    return
-    raise NotImplementedError("Implementar esta función")
-
+    # raise NotImplementedError("Implementar esta función")
 
 if __name__ == "__main__":
     import doctest
